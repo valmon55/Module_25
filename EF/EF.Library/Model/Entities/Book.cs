@@ -13,5 +13,10 @@ namespace EF.Library.Model.Entities
         public string? PublishYear { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
+        public int AuthorId { get; set; }
+        public Author Author { get; set; }
+        public int GenreId { get; set; }
+        public Genre Genre { get; set; }
+
     }
 }
