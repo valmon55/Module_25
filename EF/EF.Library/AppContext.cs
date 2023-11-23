@@ -14,6 +14,7 @@ namespace EF.Library
         public DbSet<Book> Books { get; set; }
         public AppContext() 
         { 
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
