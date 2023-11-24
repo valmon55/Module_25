@@ -1,12 +1,33 @@
 ﻿using EF.Library.Model.Entities;
 using EF.Library.Model.Repositories;
+using EF.Library.PLL;
 
 namespace EF.Library
 {
     internal class Program
     {
+        public static MainView mainView;
+        public static UserInfoView userInfoView;
+        public static BookInfoView bookInfoView;
+        public static GenreInfoView genreInfoView;
+        public static AuthorInfoView authorInfoView;
+
         static void Main(string[] args)
         {
+            //mainView = new MainView();
+            //userInfoView= new UserInfoView();
+            //bookInfoView= new BookInfoView();
+            //genreInfoView= new GenreInfoView();
+            //authorInfoView= new AuthorInfoView();
+
+            //while(true)
+            //{
+            //    mainView.Show();
+            //}
+
+            ////////////////////////////////
+            //return;
+
             using (var db = new AppContext())
             { 
                 //UserRepository userRepository = new UserRepository();   
@@ -17,30 +38,35 @@ namespace EF.Library
                 db.Users.AddRange(jane,neo);
                 db.SaveChanges();
 
-                Book tennis = new Book() { Name = "Rollan Garros 23" };
-                Book fantasy = new Book() { Name = "Kassiopear" };
-                Book cs_docs = new Book() { Name = ".Net 7.0" };
-                Book oracle = new Book() { Name = "Orackle 23c docs" };
+                Author dilts = new Author() { Name = "Robert Dilts" };
+                Author ginzburg = new Author() { Name = "Ginzburg M.R." };
+                Author toelsen = new Author() { Name = "Toelsen" };
+                Author bakirov = new Author() { Name = "Anvar Bakirov" };
 
-                //db.Books.AddRange(tennis, fantasy, cs_docs);
-
-                //userRepository.AcceptBook(jane, tennis);
-                //userRepository.AcceptBook(jane, cs_docs);
-                //userRepository.AcceptBook(jane, oracle);
-                //userRepository.AcceptBook(neo, fantasy);
-                //userRepository.AcceptBook(neo, tennis);
-                //userRepository.AcceptBook(neo, fantasy);
-
-                //jane.books.AddRange(tennis, cs_docs);
-                jane.books.Add(cs_docs);
-                jane.books.Add(tennis);
-                ////tennis.User = jane;
-
-                //neo.books.AddRange(fantasy, oracle);
-                neo.books.Add(fantasy);
-                neo.books.Add(oracle);
-
+                db.Authors.AddRange(dilts, ginzburg, toelsen, bakirov);
                 db.SaveChanges();
+
+                Genre hlp = new Genre() { Name = "nlp practic" };
+                Genre hipnosys = new Genre() { Name = "hipnos" };
+                Genre programming = new Genre() { Name = "programming" };
+                db.Genres.AddRange(hlp, hipnosys, programming);
+                db.SaveChanges();
+
+
+                Book hipnosysCourse = new Book() { Name = "Hipnosys Course",Author = ginzburg, Genre = hipnosys };
+                Book nlpCourse = new Book() { Name = "Language Tricks", Author = dilts, Genre = hlp };
+                Book cs_docs = new Book() { Name = ".Net 7.0", Author = toelsen, Genre = programming };
+                Book manipulation = new Book() { Name = "Conversational Hypnosys", Author = bakirov, Genre = hlp };
+
+                db.Books.AddRange(hipnosysCourse, nlpCourse, cs_docs, manipulation);
+                db.SaveChanges();
+
+                //jane.books.Add(cs_docs);
+                //jane.books.Add(tennis);
+                //neo.books.Add(fantasy);
+                //neo.books.Add(oracle);
+
+                //db.SaveChanges();
             }
         }
     }
