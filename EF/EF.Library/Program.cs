@@ -27,15 +27,16 @@ namespace EF.Library
 
             ////////////////////////////////
             //return;
-
+            PrepareData();
+        }
+        public static void PrepareData()
+        {
             using (var db = new AppContext())
-            { 
-                //UserRepository userRepository = new UserRepository();   
-
+            {
                 User jane = new User() { Name = "Jane" };
                 User neo = new User() { Name = "Neo" };
 
-                db.Users.AddRange(jane,neo);
+                db.Users.AddRange(jane, neo);
                 db.SaveChanges();
 
                 Author dilts = new Author() { Name = "Robert Dilts" };
@@ -53,7 +54,7 @@ namespace EF.Library
                 db.SaveChanges();
 
 
-                Book hipnosysCourse = new Book() { Name = "Hipnosys Course",Author = ginzburg, Genre = hipnosys };
+                Book hipnosysCourse = new Book() { Name = "Hipnosys Course", Author = ginzburg, Genre = hipnosys };
                 Book nlpCourse = new Book() { Name = "Language Tricks", Author = dilts, Genre = hlp };
                 Book cs_docs = new Book() { Name = ".Net 7.0", Author = toelsen, Genre = programming };
                 Book manipulation = new Book() { Name = "Conversational Hypnosys", Author = bakirov, Genre = hlp };
@@ -69,5 +70,6 @@ namespace EF.Library
                 db.SaveChanges();
             }
         }
+
     }
 }
