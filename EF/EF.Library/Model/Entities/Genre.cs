@@ -10,6 +10,9 @@ namespace EF.Library.Model.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<Book> books { get; set; }
+        //public List<Book> books { get; set; }
+        ///считаем что 1 книга - 1 жанр
+        public int BookId { get; set; }
+        public Book book { get; set; }
     }
 }

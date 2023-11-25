@@ -11,6 +11,10 @@ namespace EF.Library.Model.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string? Email { get; set; }
+        /// <summary>
+        /// Отношение 1 ко многим:
+        /// 1 пользователь может иметь на руках любое кол-во книг или не иметь
+        /// </summary>
         public List<Book> books { get; set; } = new List<Book>();
     }
 }

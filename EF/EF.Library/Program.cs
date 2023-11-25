@@ -50,14 +50,20 @@ namespace EF.Library
                 Genre hlp = new Genre() { Name = "nlp practic" };
                 Genre hipnosys = new Genre() { Name = "hipnos" };
                 Genre programming = new Genre() { Name = "programming" };
+
                 db.Genres.AddRange(hlp, hipnosys, programming);
-                db.SaveChanges();
+                //db.SaveChanges();
 
 
-                Book hipnosysCourse = new Book() { Name = "Hipnosys Course", Author = ginzburg, Genre = hipnosys };
-                Book nlpCourse = new Book() { Name = "Language Tricks", Author = dilts, Genre = hlp };
-                Book cs_docs = new Book() { Name = ".Net 7.0", Author = toelsen, Genre = programming };
-                Book manipulation = new Book() { Name = "Conversational Hypnosys", Author = bakirov, Genre = hlp };
+                Book hipnosysCourse = new Book() { Name = "Hipnosys Course", Author = ginzburg};
+                Book nlpCourse = new Book() { Name = "Language Tricks", Author = dilts};
+                Book cs_docs = new Book() { Name = ".Net 7.0", Author = toelsen };
+                Book manipulation = new Book() { Name = "Conversational Hypnosys", Author = bakirov };
+
+                hipnosysCourse.Genre = hipnosys;
+                nlpCourse.Genre = hlp;
+                cs_docs.Genre = programming;
+
 
                 db.Books.AddRange(hipnosysCourse, nlpCourse, cs_docs, manipulation);
                 db.SaveChanges();
@@ -66,7 +72,7 @@ namespace EF.Library
                 jane.books.Add(hipnosysCourse);
                 neo.books.Add(cs_docs);
                 neo.books.Add(manipulation);
-
+                
                 db.SaveChanges();
             }
         }

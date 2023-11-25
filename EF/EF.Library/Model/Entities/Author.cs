@@ -10,6 +10,7 @@ namespace EF.Library.Model.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        ///У книги может быть много авторов
         public List<Book> books { get; set; }
 
     }
