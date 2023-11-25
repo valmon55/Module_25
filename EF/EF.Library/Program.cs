@@ -61,12 +61,12 @@ namespace EF.Library
                 db.Books.AddRange(hipnosysCourse, nlpCourse, cs_docs, manipulation);
                 db.SaveChanges();
 
-                //jane.books.Add(cs_docs);
-                //jane.books.Add(tennis);
-                //neo.books.Add(fantasy);
-                //neo.books.Add(oracle);
+                jane.books.Add(nlpCourse);
+                jane.books.Add(hipnosysCourse);
+                neo.books.Add(cs_docs);
+                neo.books.Add(manipulation);
 
-                //db.SaveChanges();
+                db.SaveChanges();
             }
         }
     }
