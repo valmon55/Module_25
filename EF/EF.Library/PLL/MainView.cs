@@ -39,7 +39,7 @@ namespace EF.Library.PLL
                         }
                     case "4":
                         {
-                            //Program.genreInfoView.Show();
+                            Program.genreInfoView.ShowMenu();
                             break;
                         }
                     case "0":

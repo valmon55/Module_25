@@ -26,6 +26,11 @@ namespace EF.Library.Model.Repositories
             return from genre in appContext.Genres
                    select genre;
         }
+        public void AddBookGenre(Book book, Genre genre)
+        {
+            book.Genre = genre;
+            appContext.SaveChanges();
+        }
 
     }
 }
