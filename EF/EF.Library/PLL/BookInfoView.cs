@@ -384,9 +384,9 @@ namespace EF.Library.PLL
                     {
                         true => "на руках у пользователя",
                         false => "в библиотеке",
-                        //_ => $"книга {selectedBook.Name} автора {selectedAuthor.Name} не найдена!"
+                        _ => $"книга {selectedBook.Name} автора {selectedAuthor.Name} не найдена!"
                     };
-                    Console.WriteLine($"Книга {selectedBook.Name} {exists}.");
+                    Console.WriteLine($"Книга {selectedBook.Name} {exists}");
                 }
                 catch (Exception ex)
                 {

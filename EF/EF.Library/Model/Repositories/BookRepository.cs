@@ -84,12 +84,17 @@ namespace EF.Library.Model.Repositories
         /// <param name="author"></param>
         /// <param name="bookName"></param>
         /// <returns></returns>
-        public bool BookByAuthorIsInLibrary(Author author, Book book)
+        public bool? BookByAuthorIsInLibrary(Author author, Book book)
         {
-            if(appContext.Books.Where(b => b.Name == book.Name 
-                                            && b.Authors.Any(a => a == author) 
-                                            && b.UserId == null
-                                            ).Count() > 0 )
+            if (appContext.Books.Where(b => b.Name == book.Name
+                                            && b.Authors.Any(a => a == author)
+                                            ).Count() == 0)
+                return null;
+
+            if (appContext.Books.Where(b => b.Name == book.Name 
+                                        && b.Authors.Any(a => a == author) 
+                                        && b.UserId == null
+                                        ).Count() > 0 )
                 return false;
             else 
                 return true;
