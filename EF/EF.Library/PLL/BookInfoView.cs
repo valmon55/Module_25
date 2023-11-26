@@ -33,12 +33,12 @@ namespace EF.Library.PLL
                 {
                     case "1":
                         {
-                            //Program.bookInfoView
+                            Program.bookInfoView.Show();
                             break;
                         }
                     case "2":
                         {
-                            Program.userInfoView.ShowUser();
+                            Program.bookInfoView.ShowBook();
                             break;
                         }
                     case "3":
@@ -95,17 +95,67 @@ namespace EF.Library.PLL
             }
         }
 
-        //public void Show(IEnumerable<Book> books)
-        //{
-        //    Console.WriteLine("Книги:");
-        //    foreach (var book in books)
-        //    {
-        //        Console.WriteLine($"ID: {book.Id}");
-        //        Console.WriteLine($"Имя: {book.Name}");
-        //        Console.WriteLine($"Год публикации: {book.PublishYear}");
-        //        Console.WriteLine();
-        //    }
-        //}
+        public void Show()
+        {
+            Console.WriteLine("Список всех книг:");
+
+            using (var db = new AppContext())
+            {
+                BookRepository bookRepository = new BookRepository(db);
+                var books = bookRepository.SelectAll();
+
+                foreach (var book in books)
+                {
+                    Console.Write($"ID: {book.Id} ");
+                    Console.Write($"Имя: {book.Name} ");
+                    Console.Write($"PublishYear: {book.PublishYear} ");
+                    Console.WriteLine();
+                }
+            }
+        }
+        public void ShowBook()
+        {
+            int bookId;
+            Console.Write("Введите Id книги:");
+            while (!int.TryParse(Console.ReadLine(), out bookId))
+            {
+                Console.WriteLine("Ошибка! Введите целое число!");
+            }
+            using (var db = new AppContext())
+            {
+                BookRepository bookRepository = new BookRepository(db);
+
+                var book = bookRepository.SelectById(bookId);
+                if (book is not null)
+                {
+                    Console.Write($"ID: {book.Id} ");
+                    Console.Write($"Имя: {book.Name} ");
+                    Console.Write($"PublishYear: {book.PublishYear} ");
+                    Console.WriteLine();
+                }
+            }
+        }
+
+        public void SelectById()
+        {
+            Console.WriteLine("Введите Id книги:");
+
+            using (var db = new AppContext())
+            {
+                BookRepository bookRepository = new BookRepository(db);
+                var books = bookRepository.SelectAll();
+
+                foreach (var book in books)
+                {
+                    Console.Write($"ID: {book.Id} ");
+                    Console.Write($"Имя: {book.Name} ");
+                    Console.Write($"PublishYear: {book.PublishYear} ");
+                    Console.WriteLine();
+                }
+            }
+
+        }
+
         public void SelectAllOrderedByName()
         {
             Console.WriteLine("Список всех книг в алфавитном порядке:");
@@ -119,7 +169,7 @@ namespace EF.Library.PLL
                 {
                     Console.Write($"ID: {book.Id} ");
                     Console.Write($"Имя: {book.Name} ");
-                    Console.Write($"eMail: {book.PublishYear} ");
+                    Console.Write($"PublishYear: {book.PublishYear} ");
                     Console.WriteLine();
                 }
             }
@@ -132,14 +182,21 @@ namespace EF.Library.PLL
             using (var db = new AppContext())
             {
                 BookRepository bookRepository = new BookRepository(db);
-                var books = bookRepository.SelectAllOrderedDescByPublishYear();
-
-                foreach (var book in books)
+                try
                 {
-                    Console.Write($"ID: {book.Id} ");
-                    Console.Write($"Имя: {book.Name} ");
-                    Console.Write($"eMail: {book.PublishYear} ");
-                    Console.WriteLine();
+                    var books = bookRepository.SelectAllOrderedDescByPublishYear();
+
+                    foreach (var book in books)
+                    {
+                        Console.Write($"ID: {book.Id} ");
+                        Console.Write($"Имя: {book.Name} ");
+                        Console.Write($"PublishYear: {book.PublishYear} ");
+                        Console.WriteLine();
+                    }
+                }
+                catch (Exception ex) 
+                {
+                    Console.WriteLine(ex.Message);
                 }
             }
 
