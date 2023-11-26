@@ -73,12 +73,12 @@ namespace EF.Library.PLL
                             break;
                         }
                     case "9":
-                        {
+                        {   ///Правильно
                             Program.bookInfoView.LastPublishedBook();
                             break;
                         }
                     case "10":
-                        {
+                        {   ///Правильно
                             Program.bookInfoView.SelectAllOrderedByName();
                             break;
                         }
@@ -378,7 +378,6 @@ namespace EF.Library.PLL
                     return;
                 }
 
-
                 try
                 {
                     Console.WriteLine($"Книга {selectedBook.Name} " + 
@@ -481,12 +480,15 @@ namespace EF.Library.PLL
                 BookRepository bookRepository = new BookRepository(db);
                 try
                 {
+                    /// коллекция из 1 книги максимум 
                     var book = bookRepository.LastPublishedBook();
-
-                    Console.Write($"ID: {book.Id} ");
-                    Console.Write($"Имя: {book.Name} ");
-                    Console.Write($"PublishYear: {book.PublishYear} ");
-                    Console.WriteLine();
+                    foreach (var _book in book)
+                    {
+                        Console.Write($"ID: {_book.Id} ");
+                        Console.Write($"Имя: {_book.Name} ");
+                        Console.Write($"PublishYear: {_book.PublishYear} ");
+                        Console.WriteLine();
+                    }
                 }
                 catch (Exception ex)
                 {

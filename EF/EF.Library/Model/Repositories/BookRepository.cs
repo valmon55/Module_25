@@ -117,9 +117,9 @@ namespace EF.Library.Model.Repositories
         /// Получение последней вышедшей книги.
         /// </summary>
         /// <returns></returns>
-        public Book LastPublishedBook()
+        public IQueryable<Book> LastPublishedBook()
         {
-            return (Book)appContext.Books.OrderByDescending(b => b.PublishYear).Take(1);            
+            return appContext.Books.OrderByDescending(b => b.PublishYear).Take(1);            
         }
         /// <summary>
         /// Получение списка всех книг, отсортированного в алфавитном порядке по названию.
