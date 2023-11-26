@@ -20,10 +20,7 @@ namespace EF.Library
             genreInfoView = new GenreInfoView();
             authorInfoView = new AuthorInfoView();
 
-            while (true)
-            {
-                mainView.Show();
-            }
+            mainView.Show();
 
             ////////////////////////////////
             return;

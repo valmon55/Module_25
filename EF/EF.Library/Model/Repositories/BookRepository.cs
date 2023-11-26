@@ -66,7 +66,7 @@ namespace EF.Library.Model.Repositories
         /// <returns></returns>
         public int GetBooksByGenreInLibrary(Genre genre)
         {
-            return appContext.Books.Include(g => g.Genre).Count();
+            return appContext.Books.Where(g => g.Genre == genre).Count();
         }
         /// <summary>
         /// Получать количество книг определенного автора в библиотеке.
@@ -77,10 +77,7 @@ namespace EF.Library.Model.Repositories
         /// <returns></returns>
         public int GetBooksByAuthorInLibrary(Author author)
         {
-            using (var db = new AppContext())
-            {
-                return 0;
-            }
+           return appContext.Books.Where(a => a.Authors.Contains(author)).Count();
         }
         /// <summary>
         /// Получать булевый флаг о том, есть ли книга определенного автора и с определенным названием в библиотеке.

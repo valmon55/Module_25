@@ -8,36 +8,46 @@ namespace EF.Library.PLL
 {
     public class MainView
     {
+        bool exitMenu = false;
         public void Show()
         {
-            Console.WriteLine("Выберете с какими данными будете работать:");
-            Console.WriteLine("1. Пользователи библиотеки");
-            Console.WriteLine("2. Книги");
-            Console.WriteLine("3. Авторы");
-            Console.WriteLine("4. Жанры");
-
-            switch (Console.ReadLine())
+            while (!exitMenu)
             {
-                case "1":
-                    {
-                        Program.userInfoView.ShowMenu();
-                        break;
-                    }
-                case "2":
-                    {
-                        Program.bookInfoView.ShowMenu();
-                        break;
-                    }
-                case "3":
-                    {
-                        //Program.authorInfoView.Show();
-                        break;
-                    }
-                case "4":
-                    {
-                        //Program.genreInfoView.Show();
-                        break;
-                    }
+                Console.WriteLine("Выберете с какими данными будете работать:");
+                Console.WriteLine("1. Пользователи библиотеки");
+                Console.WriteLine("2. Книги");
+                Console.WriteLine("3. Авторы");
+                Console.WriteLine("4. Жанры");
+                Console.WriteLine("0. Выйти.");
+
+                switch (Console.ReadLine())
+                {
+                    case "1":
+                        {
+                            Program.userInfoView.ShowMenu();
+                            break;
+                        }
+                    case "2":
+                        {
+                            Program.bookInfoView.ShowMenu();
+                            break;
+                        }
+                    case "3":
+                        {
+                            //Program.authorInfoView.Show();
+                            break;
+                        }
+                    case "4":
+                        {
+                            //Program.genreInfoView.Show();
+                            break;
+                        }
+                    case "0":
+                        {
+                            exitMenu = true;
+                            break;
+                        }
+                }
             }
         }
     }
