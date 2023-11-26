@@ -83,12 +83,12 @@ namespace EF.Library.PLL
                             break;
                         }
                     case "11":
-                        {
+                        {   ///Правильно
                             Program.bookInfoView.SelectAllOrderedDescByPublishYear();
                             break;
                         }
                     case "12":
-                        {
+                        {   ///Правильно
                             Program.bookInfoView.UpdateYearByBookId();
                             break;
                         }

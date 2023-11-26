@@ -136,8 +136,8 @@ namespace EF.Library.Model.Repositories
         public IQueryable<Book> SelectAllOrderedDescByPublishYear()
         {
             //Console.WriteLine($"{n.PublishYear ?? DateTime.Now.Year.ToString()}");
-            //return appContext.Books.OrderByDescending(n => Int32.Parse(n.PublishYear ?? DateTime.Now.Year.ToString()));
-            return appContext.Books.OrderByDescending(n => String.IsNullOrEmpty(n.PublishYear) ? DateTime.Now.Year : Int32.Parse(n.PublishYear)) ;
+            return appContext.Books.OrderByDescending(n => n.PublishYear);
+            //return appContext.Books.OrderByDescending(n => String.IsNullOrEmpty(n.PublishYear) ? DateTime.Now.Year : Int32.Parse(n.PublishYear)) ;
         }
 
 
