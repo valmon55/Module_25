@@ -10,47 +10,38 @@ namespace EF.Library.Model.Repositories
 {
     public class BookRepository
     {
+        private AppContext appContext;
+        public BookRepository(AppContext db)
+        {
+            this.appContext = db;
+        }
+
         public Book SelectById(int id)
         {
-            using (var db = new AppContext())
-            {
-                return (from book in db.Books
-                        where book.Id == id
-                        select book).FirstOrDefault();
-            }
+            return (from book in appContext.Books
+                    where book.Id == id
+                    select book).FirstOrDefault();
         }
         public IQueryable<Book> SelectAll()
         {
-            using (var db = new AppContext())
-            {
-                return from book in db.Books
-                       select book;
-            } 
+            return from book in appContext.Books
+                    select book;
         }
         public void Remove(Book book)
         {
-            using (var db = new AppContext()) 
-            { 
-                db.Remove(book);
-                db.SaveChanges();
-            }
+            appContext.Remove(book);
+            appContext.SaveChanges();
         }
         public void Add(Book book) 
         {
-            using (var db = new AppContext())
-            {
-                db.Add(book);
-                db.SaveChanges();
-            }
+            appContext.Add(book);
+            appContext.SaveChanges();
         }
         public void UpdateYearById(int id, string year) 
         {
-            using (var db = new AppContext())
-            {
-                Book book = SelectById(id);
-                book.PublishYear = year;
-                db.SaveChanges();
-            }
+            Book book = SelectById(id);
+            book.PublishYear = year;
+            appContext.SaveChanges();
         }
         /// <summary>
         /// Получать список книг определенного жанра и вышедших между определенными годами.
@@ -61,13 +52,9 @@ namespace EF.Library.Model.Repositories
         /// <returns></returns>
         public IQueryable<Book> GetBooksByGenreYears(Genre genre, int yearFrom, int yearTo)
         {
-            using (var db = new AppContext())
-            {
-                var books = db.Books.Include(g => g.Genre)
+                return appContext.Books.Include(g => g.Genre)
                                     .Where(b => Int32.Parse(b.PublishYear) >= yearFrom &&
                                                 Int32.Parse(b.PublishYear) <= yearTo).ToList().AsQueryable();
-                    return books;
-            }
         }
         /// <summary>
         /// Получать количество книг определенного жанра в библиотеке.
@@ -79,14 +66,7 @@ namespace EF.Library.Model.Repositories
         /// <returns></returns>
         public int GetBooksByGenreInLibrary(Genre genre)
         {
-            using (var db = new AppContext())
-            {
-                var booksByGenre = db.Books.Include(g => g.Genre).Count();
-                //var z = from user in db.Users
-                //        from book in db.Books.Include(g => g.Genre)
-                //        where book in user.
-                return 0;
-            }
+            return appContext.Books.Include(g => g.Genre).Count();
         }
         /// <summary>
         /// Получать количество книг определенного автора в библиотеке.
@@ -144,10 +124,7 @@ namespace EF.Library.Model.Repositories
         /// <returns></returns>
         public IQueryable<Book> SelectAllOrderedByName()
         {
-            using (var db = new AppContext())
-            {
-                return db.Books.OrderBy(n => n.Name);
-            }
+            return appContext.Books.OrderBy(n => n.Name);
         }
         /// <summary>
         /// Получение списка всех книг, отсортированного в порядке убывания года их выхода.
@@ -155,10 +132,7 @@ namespace EF.Library.Model.Repositories
         /// <returns></returns>
         public IQueryable<Book> SelectAllOrderedDescByPublishYear()
         {
-            using (var db = new AppContext())
-            {
-                return db.Books.OrderByDescending(n => Int32.Parse(n.PublishYear));
-            }
+            return appContext.Books.OrderByDescending(n => Int32.Parse(n.PublishYear));
         }
 
 

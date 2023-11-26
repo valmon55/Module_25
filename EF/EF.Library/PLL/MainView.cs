@@ -25,7 +25,7 @@ namespace EF.Library.PLL
                     }
                 case "2":
                     {
-                        //Program.bookInfoView.Show();
+                        Program.bookInfoView.ShowMenu();
                         break;
                     }
                 case "3":
