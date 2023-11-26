@@ -58,7 +58,7 @@ namespace EF.Library.PLL
                             break;
                         }
                     case "6":
-                        {
+                        {   ///Правильно
                             Program.bookInfoView.BookAuthorIsInLibrary();
                             break;
                         }
