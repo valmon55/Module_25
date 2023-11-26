@@ -57,13 +57,19 @@ namespace EF.Library
                 Book cs_patterns = new Book() { Name = "CS Patterns" };
                 Book conversationHipnosys = new Book() { Name = "Conversational Hypnosys" };
 
+                hipnosysCourse.Authors = new();
                 hipnosysCourse.Authors.Add(ginzburg);
+                nlpCourse.Authors = new List<Author>();
                 nlpCourse.Authors.AddRange(new[] { dilts, grinder });
+                cs_docs.Authors = new List<Author>();
                 cs_docs.Authors.AddRange(new[] { toelsen, shevchuk });
+                manipulation.Authors = new List<Author>();
                 manipulation.Authors.Add(bakirov);
 
                 //cs_patterns.Author.Add(shevchuk);
+                shevchuk.Books = new List<Book>();
                 shevchuk.Books.AddRange(new[] { cs_patterns, cs_docs });
+                bakirov.Books = new List<Book>();
                 bakirov.Books.AddRange(new[] { conversationHipnosys, manipulation });
                 //conversationHipnosys.Authors.Add(bakirov);
 
