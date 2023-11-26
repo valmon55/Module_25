@@ -87,7 +87,7 @@ namespace EF.Library.Model.Repositories
         public bool BookByAuthorIsInLibrary(Author author, Book book)
         {
             if(appContext.Books.Where(b => b.Name == book.Name 
-                                            && b.Authors.Exists(a => a == author) 
+                                            && b.Authors.Any(a => a == author) 
                                             && b.UserId == null
                                             ).Count() > 0 )
                 return false;

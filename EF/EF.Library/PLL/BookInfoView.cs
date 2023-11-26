@@ -380,8 +380,13 @@ namespace EF.Library.PLL
 
                 try
                 {
-                    Console.WriteLine($"Книга {selectedBook.Name} " + 
-                        $"{bookRepository.BookByAuthorIsInLibrary(selectedAuthor, selectedBook)} в библиотеке.");
+                    var exists = bookRepository.BookByAuthorIsInLibrary(selectedAuthor, selectedBook) switch
+                    {
+                        true => "на руках у пользователя",
+                        false => "в библиотеке",
+                        //_ => $"книга {selectedBook.Name} автора {selectedAuthor.Name} не найдена!"
+                    };
+                    Console.WriteLine($"Книга {selectedBook.Name} {exists}.");
                 }
                 catch (Exception ex)
                 {
