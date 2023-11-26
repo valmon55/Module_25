@@ -16,7 +16,7 @@ namespace EF.Library
         public DbSet<Genre> Genres { get; set; }
         public AppContext() 
         { 
-            Database.EnsureDeleted();
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -14,20 +14,32 @@ namespace EF.Library
 
         static void Main(string[] args)
         {
-            //mainView = new MainView();
-            //userInfoView= new UserInfoView();
-            //bookInfoView= new BookInfoView();
-            //genreInfoView= new GenreInfoView();
-            //authorInfoView= new AuthorInfoView();
+            mainView = new MainView();
+            userInfoView = new UserInfoView();
+            bookInfoView = new BookInfoView();
+            genreInfoView = new GenreInfoView();
+            authorInfoView = new AuthorInfoView();
 
-            //while(true)
-            //{
-            //    mainView.Show();
-            //}
+            while (true)
+            {
+                mainView.Show();
+            }
 
             ////////////////////////////////
-            //return;
-            PrepareData();
+            return;
+            
+            //UserRepository userRepository = new UserRepository();
+            using (var db = new AppContext())
+            {
+                //var users = userRepository.SelectAll().ToList();
+                var users = (from user in db.Users
+                             select user);
+                foreach (User user in users)
+                {
+                    Console.WriteLine(user.Name);
+                }
+            }
+            //PrepareData();
         }
         public static void PrepareData()
         {

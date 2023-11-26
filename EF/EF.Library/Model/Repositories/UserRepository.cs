@@ -9,22 +9,21 @@ namespace EF.Library.Model.Repositories
 {
     public class UserRepository
     {
+        private AppContext appContext;
+        public UserRepository(AppContext db) 
+        {
+            appContext = db;
+        }
         public User SelectById(int id)
         {
-            using (var db = new AppContext())
-            {
-                return (from user in db.Users
-                        where user.Id == id
-                        select user).FirstOrDefault();
-            }
+            return (from user in appContext.Users
+                    where user.Id == id
+                    select user).FirstOrDefault();
         }
         public IQueryable<User> SelectAll()
         {
-            using (var db = new AppContext())
-            {
-                return from user in db.Users
-                       select user;
-            }
+            return from user in appContext.Users
+                    select user;
         }
         public void Remove(User user)
         {
