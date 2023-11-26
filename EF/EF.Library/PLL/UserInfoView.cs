@@ -10,9 +10,75 @@ namespace EF.Library.PLL
 {
     public class UserInfoView
     {
-        public void Show()
+        public void ShowMenu()
         {
             bool exitMenu = false;
+            while (!exitMenu)
+            {
+                Console.WriteLine("Выберете действие:");
+                Console.WriteLine("1. Пользователи библиотеки");
+                Console.WriteLine("2. Поиск пользователя по Id");
+                Console.WriteLine("3. Kоличество книг на руках у пользователя.");
+                Console.WriteLine("4. Обновить Email пользователя по Id");
+                Console.WriteLine("5. Взять книгу в библиотеке.");
+                Console.WriteLine("6. Вернуть книгу в библиотеку.");
+                Console.WriteLine("7. Добавить пользователя.");
+                Console.WriteLine("8. Удалить пользователя.");
+                Console.WriteLine("0. Выйти из меню.");
+
+                switch (Console.ReadLine())
+                {
+                    case "1":
+                        {
+                            Program.userInfoView.Show();
+                            break;
+                        }
+                    case "2":
+                        {
+                            Program.userInfoView.ShowUser();
+                            break;
+                        }
+                    case "3":
+                        {
+                            //Program.authorInfoView.Show();
+                            break;
+                        }
+                    case "4":
+                        {
+                            //Program.genreInfoView.Show();
+                            break;
+                        }
+                    case "5":
+                        {
+                            //Program.genreInfoView.Show();
+                            break;
+                        }
+                    case "6":
+                        {
+                            //Program.genreInfoView.Show();
+                            break;
+                        }
+                    case "7":
+                        {
+                            //Program.genreInfoView.Show();
+                            break;
+                        }
+                    case "8":
+                        {
+                            //Program.genreInfoView.Show();
+                            break;
+                        }
+                    case "0":
+                        {
+                            exitMenu = true;
+                            break;
+                        }
+                }
+            }
+        }
+        public void Show()
+        {
+            //bool exitMenu = false;
             Console.WriteLine("Пользавтели:");
             
             //UserRepository userRepository = new UserRepository();
@@ -31,69 +97,69 @@ namespace EF.Library.PLL
                     Console.WriteLine();
                 }
             }
-            while(!exitMenu )
-            { 
-            Console.WriteLine("Выберете действие:");
-            Console.WriteLine("1. Пользователи библиотеки");
-            Console.WriteLine("2. Поиск пользователя по Id");
-            Console.WriteLine("3. Kоличество книг на руках у пользователя.");
-            Console.WriteLine("4. Обновить Email пользователя по Id");
-            Console.WriteLine("5. Взять книгу в библиотеке.");
-            Console.WriteLine("6. Вернуть книгу в библиотеку.");
-            Console.WriteLine("7. Добавить пользователя.");
-            Console.WriteLine("8. Удалить пользователя.");
-            Console.WriteLine("0. Выйти из меню.");
+            //while(!exitMenu )
+            //{ 
+            //Console.WriteLine("Выберете действие:");
+            //Console.WriteLine("1. Пользователи библиотеки");
+            //Console.WriteLine("2. Поиск пользователя по Id");
+            //Console.WriteLine("3. Kоличество книг на руках у пользователя.");
+            //Console.WriteLine("4. Обновить Email пользователя по Id");
+            //Console.WriteLine("5. Взять книгу в библиотеке.");
+            //Console.WriteLine("6. Вернуть книгу в библиотеку.");
+            //Console.WriteLine("7. Добавить пользователя.");
+            //Console.WriteLine("8. Удалить пользователя.");
+            //Console.WriteLine("0. Выйти из меню.");
 
-            switch (Console.ReadLine())
-            {
-                case "1":
-                    {
-                        Program.userInfoView.Show();
-                        break;
-                    }
-                case "2":
-                    {
-                        Program.userInfoView.ShowUser();
-                        break;
-                    }
-                case "3":
-                    {
-                        //Program.authorInfoView.Show();
-                        break;
-                    }
-                case "4":
-                    {
-                        //Program.genreInfoView.Show();
-                        break;
-                    }
-                case "5":
-                    {
-                        //Program.genreInfoView.Show();
-                        break;
-                    }
-                case "6":
-                    {
-                        //Program.genreInfoView.Show();
-                        break;
-                    }
-                case "7":
-                    {
-                        //Program.genreInfoView.Show();
-                        break;
-                    }
-                case "8":
-                    {
-                        //Program.genreInfoView.Show();
-                        break;
-                    }
-                case "0":
-                    {
-                        exitMenu = true;
-                        break;
-                    }
-                }
-            }
-
+            //switch (Console.ReadLine())
+            //{
+            //    case "1":
+            //        {
+            //            Program.userInfoView.Show();
+            //            break;
+            //        }
+            //    case "2":
+            //        {
+            //            Program.userInfoView.ShowUser();
+            //            break;
+            //        }
+            //    case "3":
+            //        {
+            //            //Program.authorInfoView.Show();
+            //            break;
+            //        }
+            //    case "4":
+            //        {
+            //            //Program.genreInfoView.Show();
+            //            break;
+            //        }
+            //    case "5":
+            //        {
+            //            //Program.genreInfoView.Show();
+            //            break;
+            //        }
+            //    case "6":
+            //        {
+            //            //Program.genreInfoView.Show();
+            //            break;
+            //        }
+            //    case "7":
+            //        {
+            //            //Program.genreInfoView.Show();
+            //            break;
+            //        }
+            //    case "8":
+            //        {
+            //            //Program.genreInfoView.Show();
+            //            break;
+            //        }
+            //    case "0":
+            //        {
+            //                exitMenu = true;
+            //            break;
+            //        }
+            //    }
+            //}
+            //return exitMenu;
         }
         public void ShowUser()
         {

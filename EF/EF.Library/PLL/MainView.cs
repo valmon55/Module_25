@@ -20,7 +20,7 @@ namespace EF.Library.PLL
             {
                 case "1":
                     {
-                        Program.userInfoView.Show();
+                        Program.userInfoView.ShowMenu();
                         break;
                     }
                 case "2":
