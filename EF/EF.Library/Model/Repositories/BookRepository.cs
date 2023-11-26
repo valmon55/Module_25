@@ -101,7 +101,7 @@ namespace EF.Library.Model.Repositories
         /// <returns></returns>
         public bool BookIsOnUser(Book book) 
         {
-            if (appContext.Books.Where(b => b.Id == book.Id && b.UserId != null).Count() >= 0)
+            if (appContext.Books.Where(b => b == book && b.UserId != null).Count() > 0)
                 return true; // на руках у пользователя
             else
                 return true;

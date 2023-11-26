@@ -33,12 +33,12 @@ namespace EF.Library.PLL
                 switch (Console.ReadLine())
                 {
                     case "1":
-                        {
+                        {   ///Правильно
                             Program.bookInfoView.Show();
                             break;
                         }
                     case "2":
-                        {
+                        {   ///Правильно
                             Program.bookInfoView.ShowBook();
                             break;
                         }
@@ -53,7 +53,7 @@ namespace EF.Library.PLL
                             break;
                         }
                     case "5":
-                        {
+                        {   ///Правильно
                             Program.bookInfoView.GetBooksByGenre();
                             break;
                         }
@@ -421,7 +421,12 @@ namespace EF.Library.PLL
 
                 try
                 {
-                    Console.WriteLine($"Книга {selectedBook.Name} {bookRepository.BookIsOnUser(selectedBook)} на руках.");
+                    var exists = bookRepository.BookIsOnUser(selectedBook) switch
+                    {
+                        true => "на руках у пользователя",
+                        _ => "в библиотеке"
+                    };
+                    Console.WriteLine($"Книга {selectedBook.Name} {exists}.");
                 }
                 catch (Exception ex)
                 {
