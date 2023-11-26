@@ -40,32 +40,41 @@ namespace EF.Library
                 db.SaveChanges();
 
                 Author dilts = new Author() { Name = "Robert Dilts" };
+                Author grinder = new Author() { Name = "John Grinder" };
                 Author ginzburg = new Author() { Name = "Ginzburg M.R." };
                 Author toelsen = new Author() { Name = "Toelsen" };
+                Author shevchuk = new Author() { Name = "Alex Shevchuk" };
                 Author bakirov = new Author() { Name = "Anvar Bakirov" };
-
-                db.Authors.AddRange(dilts, ginzburg, toelsen, bakirov);
-                db.SaveChanges();
 
                 Genre hlp = new Genre() { Name = "nlp practic" };
                 Genre hipnosys = new Genre() { Name = "hipnos" };
                 Genre programming = new Genre() { Name = "programming" };
 
-                db.Genres.AddRange(hlp, hipnosys, programming);
-                //db.SaveChanges();
+                Book hipnosysCourse = new Book() { Name = "Hipnosys Course"};
+                Book nlpCourse = new Book() { Name = "Language Tricks"};
+                Book cs_docs = new Book() { Name = ".Net 7.0" };
+                Book manipulation = new Book() { Name = "Manipulation" };
+                Book cs_patterns = new Book() { Name = "CS Patterns" };
+                Book conversationHipnosys = new Book() { Name = "Conversational Hypnosys" };
 
+                hipnosysCourse.Authors.Add(ginzburg);
+                nlpCourse.Authors.AddRange(new[] { dilts, grinder });
+                cs_docs.Authors.AddRange(new[] { toelsen, shevchuk });
+                manipulation.Authors.Add(bakirov);
 
-                Book hipnosysCourse = new Book() { Name = "Hipnosys Course", Author = ginzburg};
-                Book nlpCourse = new Book() { Name = "Language Tricks", Author = dilts};
-                Book cs_docs = new Book() { Name = ".Net 7.0", Author = toelsen };
-                Book manipulation = new Book() { Name = "Conversational Hypnosys", Author = bakirov };
+                //cs_patterns.Author.Add(shevchuk);
+                shevchuk.Books.AddRange(new[] { cs_patterns, cs_docs });
+                bakirov.Books.AddRange(new[] { conversationHipnosys, manipulation });
+                //conversationHipnosys.Authors.Add(bakirov);
 
                 hipnosysCourse.Genre = hipnosys;
                 nlpCourse.Genre = hlp;
                 cs_docs.Genre = programming;
 
+                db.Authors.AddRange(dilts, ginzburg, toelsen, bakirov, grinder, shevchuk);
+                db.Genres.AddRange(hlp, hipnosys, programming);
+                db.Books.AddRange(hipnosysCourse, nlpCourse, cs_docs, manipulation, cs_patterns, conversationHipnosys);
 
-                db.Books.AddRange(hipnosysCourse, nlpCourse, cs_docs, manipulation);
                 db.SaveChanges();
 
                 jane.books.Add(nlpCourse);
