@@ -65,7 +65,7 @@ namespace EF.Library.Model.Repositories
         /// <returns></returns>
         public int GetBooksByGenreInLibrary(Genre genre)
         {
-            return appContext.Books.Where(g => g.Genre == genre).Count();
+            return appContext.Books.Where(b => b.Genre == genre && b.UserId == null).Count();
         }
         /// <summary>
         /// Получать количество книг определенного автора в библиотеке.
@@ -76,7 +76,7 @@ namespace EF.Library.Model.Repositories
         /// <returns></returns>
         public int GetBooksByAuthorInLibrary(Author author)
         {
-           return appContext.Books.Where(a => a.Authors.Contains(author)).Count();
+           return appContext.Books.Where(b => b.Authors.Contains(author) && b.UserId == null).Count();
         }
         /// <summary>
         /// Получать булевый флаг о том, есть ли книга определенного автора и с определенным названием в библиотеке.
@@ -88,6 +88,7 @@ namespace EF.Library.Model.Repositories
         {
             if(appContext.Books.Where(b => b.Name == book.Name 
                                             && b.Authors.Exists(a => a == author) 
+                                            && b.UserId == null
                                             ).Count() > 0 )
                 return false;
             else 
@@ -100,7 +101,7 @@ namespace EF.Library.Model.Repositories
         /// <returns></returns>
         public bool BookIsOnUser(Book book) 
         {
-            if (appContext.Books.Where(b => b.Id == book.Id && b.UserId != null).Count() != 0)
+            if (appContext.Books.Where(b => b.Id == book.Id && b.UserId != null).Count() >= 0)
                 return true; // на руках у пользователя
             else
                 return true;

@@ -48,7 +48,7 @@ namespace EF.Library.PLL
                             break;
                         }
                     case "4":
-                        {
+                        {   ///Правильно
                             Program.bookInfoView.GetBooksByAuthor();
                             break;
                         }
