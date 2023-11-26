@@ -64,17 +64,17 @@ namespace EF.Library.PLL
                         }
                     case "7":
                         {
-                            //Program.genreInfoView.Show();
+                            
                             break;
                         }
                     case "8":
                         {
-                            //Program.genreInfoView.Show();
+                            Program.bookInfoView.UserBooks();
                             break;
                         }
                     case "9":
                         {
-                            //Program.genreInfoView.Show();
+                            Program.bookInfoView.LastPublishedBook();
                             break;
                         }
                     case "10":
@@ -333,9 +333,69 @@ namespace EF.Library.PLL
         /// п.5
 
         /// п.6
+        public void UserBooks()
+        {
+            Console.WriteLine("Кол-во книг на руках у пользователя:");
+
+            using (var db = new AppContext())
+            {
+                BookRepository bookRepository = new BookRepository(db);
+                UserRepository userRepository = new UserRepository(db);
+
+                var users = userRepository.SelectAll();
+                foreach (var user in users)
+                {
+                    Console.Write($"ID: {user.Id} ");
+                    Console.Write($"Имя: {user.Name} ");
+                    Console.WriteLine();
+                }
+                int userId;
+                Console.Write("Введите Id автора:");
+                while (!int.TryParse(Console.ReadLine(), out userId))
+                {
+                    Console.WriteLine("Ошибка! Введите целое число!");
+                }
+                var selectedUser = userRepository.SelectById(userId);
+                if (selectedUser == null)
+                {
+                    Console.WriteLine($"Пользователь с Id {userId} отсуствует!");
+                    return;
+                }
+
+                try
+                {
+                    Console.WriteLine($"{bookRepository.UserBooks(userId)} книг на руках у {selectedUser.Name}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
 
         /// п.7
+        public void LastPublishedBook()
+        {
+            Console.WriteLine("Последняя изданная книга:");
 
+            using (var db = new AppContext())
+            {
+                BookRepository bookRepository = new BookRepository(db);
+                try
+                {
+                    var book = bookRepository.LastPublishedBook();
+
+                    Console.Write($"ID: {book.Id} ");
+                    Console.Write($"Имя: {book.Name} ");
+                    Console.Write($"PublishYear: {book.PublishYear} ");
+                    Console.WriteLine();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
         /// п.8
         public void SelectAllOrderedByName()
         {

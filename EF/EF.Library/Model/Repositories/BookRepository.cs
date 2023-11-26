@@ -15,7 +15,6 @@ namespace EF.Library.Model.Repositories
         {
             this.appContext = db;
         }
-
         public Book SelectById(int id)
         {
             return (from book in appContext.Books
@@ -97,12 +96,9 @@ namespace EF.Library.Model.Repositories
         /// </summary>
         /// <param name="bookName"></param>
         /// <returns></returns>
-        public bool BookIsOnUser(string bookName)
+        public int UserBooks(int userId)
         {
-            using (var db = new AppContext())
-            {
-                return false;
-            }
+            return appContext.Books.Where(b => b.UserId == userId).Count();
         }
         /// <summary>
         /// Получение последней вышедшей книги.
@@ -110,10 +106,7 @@ namespace EF.Library.Model.Repositories
         /// <returns></returns>
         public Book LastPublishedBook()
         {
-            using (var db = new AppContext())
-            {
-                return null;
-            }
+            return (Book)appContext.Books.OrderByDescending(b => b.PublishYear).Take(1);            
         }
         /// <summary>
         /// Получение списка всех книг, отсортированного в алфавитном порядке по названию.
