@@ -59,16 +59,16 @@ namespace EF.Library.PLL
                         }
                     case "6":
                         {
-                            //Program.genreInfoView.Show();
+                            Program.bookInfoView.BookAuthorIsInLibrary();
                             break;
                         }
                     case "7":
                         {
-                            
+                            Program.bookInfoView.BookIsOnUser();
                             break;
                         }
                     case "8":
-                        {
+                        {   ///Правильно
                             Program.bookInfoView.UserBooks();
                             break;
                         }
@@ -329,9 +329,108 @@ namespace EF.Library.PLL
             }
         }
         /// п.4
+        public void BookAuthorIsInLibrary()
+        {
+            Console.WriteLine("Список книг для проверки:");
 
+            using (var db = new AppContext())
+            {
+                BookRepository bookRepository = new BookRepository(db);
+                AuthorRepository authorRepository = new AuthorRepository(db);
+
+                var books = bookRepository.SelectAll();
+                foreach (var book in books)
+                {
+                    Console.Write($"ID: {book.Id} ");
+                    Console.Write($"Имя: {book.Name} ");
+                    Console.WriteLine();
+                }
+                int bookId;
+                Console.Write("Введите Id книги:");
+                while (!int.TryParse(Console.ReadLine(), out bookId))
+                {
+                    Console.WriteLine("Ошибка! Введите целое число!");
+                }
+                var selectedBook = bookRepository.SelectById(bookId);
+                if (selectedBook == null)
+                {
+                    Console.WriteLine($"Книга с Id {bookId} отсуствует!");
+                    return;
+                }
+                //выбираем автора
+                var authors = authorRepository.SelectAll();
+                foreach (var author in authors)
+                {
+                    Console.Write($"ID: {author.Id} ");
+                    Console.Write($"Имя: {author.Name} ");
+                    Console.WriteLine();
+                }
+                int authorId;
+                Console.Write("Введите Id автора:");
+                while (!int.TryParse(Console.ReadLine(), out authorId))
+                {
+                    Console.WriteLine("Ошибка! Введите целое число!");
+                }
+                var selectedAuthor = authorRepository.SelectById(authorId);
+                if (selectedAuthor == null)
+                {
+                    Console.WriteLine($"Автор с Id {bookId} отсуствует!");
+                    return;
+                }
+
+
+                try
+                {
+                    Console.WriteLine($"Книга {selectedBook.Name} " + 
+                        $"{bookRepository.BookByAuthorIsInLibrary(selectedAuthor, selectedBook)} в библиотеке.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+        }
         /// п.5
+        public void BookIsOnUser()
+        {
+            Console.WriteLine("Список книг для проверки:");
 
+            using (var db = new AppContext())
+            {
+                BookRepository bookRepository = new BookRepository(db);
+
+                var books = bookRepository.SelectAll();
+                foreach (var book in books)
+                {
+                    Console.Write($"ID: {book.Id} ");
+                    Console.Write($"Имя: {book.Name} ");
+                    Console.WriteLine();
+                }
+                int bookId;
+                Console.Write("Введите Id книги:");
+                while (!int.TryParse(Console.ReadLine(), out bookId))
+                {
+                    Console.WriteLine("Ошибка! Введите целое число!");
+                }
+                var selectedBook = bookRepository.SelectById(bookId);
+                if (selectedBook == null)
+                {
+                    Console.WriteLine($"Книга с Id {bookId} отсуствует!");
+                    return;
+                }
+
+                try
+                {
+                    Console.WriteLine($"Книга {selectedBook.Name} {bookRepository.BookIsOnUser(selectedBook)} на руках.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+        }
         /// п.6
         public void UserBooks()
         {
@@ -364,7 +463,7 @@ namespace EF.Library.PLL
 
                 try
                 {
-                    Console.WriteLine($"{bookRepository.UserBooks(userId)} книг на руках у {selectedUser.Name}");
+                    Console.WriteLine($"{bookRepository.UserBooks(selectedUser)} книг на руках у {selectedUser.Name}");
                 }
                 catch (Exception ex)
                 {
@@ -372,7 +471,6 @@ namespace EF.Library.PLL
                 }
             }
         }
-
         /// п.7
         public void LastPublishedBook()
         {

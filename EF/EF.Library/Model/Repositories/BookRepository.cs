@@ -84,21 +84,34 @@ namespace EF.Library.Model.Repositories
         /// <param name="author"></param>
         /// <param name="bookName"></param>
         /// <returns></returns>
-        public bool BookByAuthorIsInLibrary(Author author, string bookName)
+        public bool BookByAuthorIsInLibrary(Author author, Book book)
         {
-            using (var db = new AppContext())
-            {
+            if(appContext.Books.Where(b => b.Name == book.Name 
+                                            && b.Authors.Exists(a => a == author) 
+                                            ).Count() > 0 )
                 return false;
-            }
+            else 
+                return true;
         }
         /// <summary>
         /// Получать булевый флаг о том, есть ли определенная книга на руках у пользователя.
         /// </summary>
         /// <param name="bookName"></param>
         /// <returns></returns>
-        public int UserBooks(int userId)
+        public bool BookIsOnUser(Book book) 
         {
-            return appContext.Books.Where(b => b.UserId == userId).Count();
+            if (appContext.Books.Where(b => b.Id == book.Id && b.UserId != null).Count() != 0)
+                return true; // на руках у пользователя
+            else
+                return true;
+        }
+        /// <summary>
+        /// Кол-во книг на руках у пользователя.
+        /// </summary>
+        /// <returns></returns>
+        public int UserBooks(User user)
+        {
+            return appContext.Books.Where(b => b.User == user).Count();
         }
         /// <summary>
         /// Получение последней вышедшей книги.
