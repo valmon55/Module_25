@@ -36,7 +36,7 @@ namespace EF.Library.Model.Repositories
             appContext.Add(book);
             appContext.SaveChanges();
         }
-        public void UpdateYearById(int id, string year) 
+        public void UpdateYearById(int id, int year) 
         {
             Book book = SelectById(id);
             book.PublishYear = year;
@@ -51,9 +51,12 @@ namespace EF.Library.Model.Repositories
         /// <returns></returns>
         public IQueryable<Book> GetBooksByGenreYears(Genre genre, int yearFrom, int yearTo)
         {
-                return appContext.Books.Include(g => g.Genre)
-                                    .Where(b => Int32.Parse(b.PublishYear) >= yearFrom &&
-                                                Int32.Parse(b.PublishYear) <= yearTo).ToList().AsQueryable();
+            return appContext.Books.
+                        Where(b => b.PublishYear >= yearFrom &&
+                              b.PublishYear <= yearTo)
+                        .Join(appContext.Genres
+                                .Where(g => g.Id == genre.Id), b => b.Id, g => g.BookId,
+                              (b, g) => b);
         }
         /// <summary>
         /// Получать количество книг определенного жанра в библиотеке.
@@ -111,6 +114,11 @@ namespace EF.Library.Model.Repositories
             else
                 return true;
         }
+        public IQueryable<Book> BookIsOnUser()
+        {
+            return appContext.Books.Where(b => b.UserId != null);
+        }
+
         /// <summary>
         /// Кол-во книг на руках у пользователя.
         /// </summary>

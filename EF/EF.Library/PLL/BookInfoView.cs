@@ -173,7 +173,7 @@ namespace EF.Library.PLL
                 {
                     Console.Write($"ID: {book.Id} ");
                     Console.Write($"Имя: {book.Name} ");
-                    Console.Write($"PublishYear: {book.PublishYear} ");
+                    Console.Write($"PublishYear: {book.PublishYear.ToString()} ");
                     Console.WriteLine();
                 }
                 int bookId;
@@ -183,13 +183,13 @@ namespace EF.Library.PLL
                     Console.WriteLine("Ошибка! Введите целое число!");
                 }
                 Console.WriteLine("Введите год издания:");
-                var yearStr = Console.ReadLine();
-                while (!int.TryParse(yearStr, out _))
+                int year;
+                while (!int.TryParse(Console.ReadLine(), out year))
                 {
                     Console.WriteLine("Ошибка! Введите целое число!");
                 }
 
-                bookRepository.UpdateYearById(bookId, yearStr);
+                bookRepository.UpdateYearById(bookId, year);
             }
         }
         /// п.1
@@ -236,12 +236,15 @@ namespace EF.Library.PLL
                 try
                 {
                     var books = bookRepository.GetBooksByGenreYears(selectedGenre, yearFrom, yearTo);
-                    foreach (var book in books)
+                    if (books != null)
                     {
-                        Console.Write($"ID: {book.Id} ");
-                        Console.Write($"Имя: {book.Name} ");
-                        Console.Write($"PublishYear: {book.PublishYear} ");
-                        Console.WriteLine();
+                        foreach (var book in books)
+                        {
+                            Console.Write($"ID: {book.Id} ");
+                            Console.Write($"Имя: {book.Name} ");
+                            Console.Write($"PublishYear: {book.PublishYear} ");
+                            Console.WriteLine();
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -423,7 +426,13 @@ namespace EF.Library.PLL
                     Console.WriteLine($"Книга с Id {bookId} отсуствует!");
                     return;
                 }
-
+                var filteredBooks = bookRepository.BookIsOnUser();
+                foreach (var book in filteredBooks) 
+                {
+                    Console.Write($"ID: {book.Id} ");
+                    Console.Write($"Имя: {book.Name} ");
+                    Console.WriteLine();
+                }
                 try
                 {
                     var exists = bookRepository.BookIsOnUser(selectedBook) switch
