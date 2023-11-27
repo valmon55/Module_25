@@ -107,16 +107,16 @@ namespace EF.Library.Model.Repositories
         /// </summary>
         /// <param name="bookName"></param>
         /// <returns></returns>
-        public bool BookIsOnUser(Book book) 
+        //public bool BookIsOnUser(Book book) 
+        //{
+        //    if (appContext.Books.Where(b => b == book && b.UserId != null).Count() > 0)
+        //        return true; // на руках у пользователя
+        //    else
+        //        return true;
+        //}
+        public IQueryable<Book> BookIsOnUser(Book book)
         {
-            if (appContext.Books.Where(b => b == book && b.UserId != null).Count() > 0)
-                return true; // на руках у пользователя
-            else
-                return true;
-        }
-        public IQueryable<Book> BookIsOnUser()
-        {
-            return appContext.Books.Where(b => b.UserId != null);
+            return appContext.Books.Where(b => b == book && b.UserId != null);
         }
 
         /// <summary>

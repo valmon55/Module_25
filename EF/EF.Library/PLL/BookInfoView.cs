@@ -43,7 +43,7 @@ namespace EF.Library.PLL
                             break;
                         }
                     case "3":
-                        {
+                        {   ///Правильно
                             Program.bookInfoView.GetBooksByGenreYears();
                             break;
                         }
@@ -63,7 +63,7 @@ namespace EF.Library.PLL
                             break;
                         }
                     case "7":
-                        {
+                        {   ///Правильно
                             Program.bookInfoView.BookIsOnUser();
                             break;
                         }
@@ -426,20 +426,15 @@ namespace EF.Library.PLL
                     Console.WriteLine($"Книга с Id {bookId} отсуствует!");
                     return;
                 }
-                var filteredBooks = bookRepository.BookIsOnUser();
-                foreach (var book in filteredBooks) 
-                {
-                    Console.Write($"ID: {book.Id} ");
-                    Console.Write($"Имя: {book.Name} ");
-                    Console.WriteLine();
-                }
+                
                 try
                 {
-                    var exists = bookRepository.BookIsOnUser(selectedBook) switch
-                    {
-                        true => "на руках у пользователя",
-                        _ => "в библиотеке"
-                    };
+                    var filteredBooks = bookRepository.BookIsOnUser(selectedBook);
+                    string exists;
+                    if (filteredBooks.Count() > 0)
+                        exists = "на руках у пользователя";
+                    else
+                        exists = "в библиотеке";
                     Console.WriteLine($"Книга {selectedBook.Name} {exists}.");
                 }
                 catch (Exception ex)
