@@ -59,12 +59,12 @@ namespace EF.Library
                 Genre hipnosys = new Genre() { Name = "hipnos" };
                 Genre programming = new Genre() { Name = "programming" };
 
-                Book hipnosysCourse = new Book() { Name = "Hipnosys Course"};
-                Book nlpCourse = new Book() { Name = "Language Tricks"};
-                Book cs_docs = new Book() { Name = ".Net 7.0" };
-                Book manipulation = new Book() { Name = "Manipulation" };
-                Book cs_patterns = new Book() { Name = "CS Patterns" };
-                Book conversationHipnosys = new Book() { Name = "Conversational Hypnosys" };
+                Book hipnosysCourse = new Book() { Name = "Hipnosys Course", PublishYear = 2010};
+                Book nlpCourse = new Book() { Name = "Language Tricks", PublishYear = 1999};
+                Book cs_docs = new Book() { Name = ".Net 7.0", PublishYear = 2020 };
+                Book manipulation = new Book() { Name = "Manipulation", PublishYear = 2008 };
+                Book cs_patterns = new Book() { Name = "CS Patterns", PublishYear = 2015 };
+                Book conversationHipnosys = new Book() { Name = "Conversational Hypnosys", PublishYear = 2007 };
 
                 hipnosysCourse.Authors = new();
                 hipnosysCourse.Authors.Add(ginzburg);
